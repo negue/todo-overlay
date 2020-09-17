@@ -9,7 +9,7 @@ import type { TodoItem } from './types/item';
 
 
 ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-  if( flags.broadcaster && command === "todo" ) {
+  if( (flags.broadcaster || flags.mod) && command === "todo" ) {
     const [subCommand, ...content] = message.split(' ');
     const realContent = content.join(' ');
 

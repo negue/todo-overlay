@@ -9,16 +9,23 @@ export let items: TodoItem[];
 <div class="nes-container is-dark with-title">
   <p class="title">{taskListName}</p>
   
-  <div style="background-color:#212529; padding: 1rem 0;">
+  <div>
   {#each items as item, _index}
   
-    <label>
-       #{_index + 1} 
+      <label class="entry" >
+   
+      
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-        <span>{item.label}</span>
+        <span class="label-with-number" style="">          
+          <div style="display: inline-block">
+            {item.label} 
+            <span class="nes-text is-warning">
+              [#{_index + 1}]
+            </span>
+          </div>
+        </span>
     </label>
 
-    <br>
     {/each}
 
         </div>
@@ -27,5 +34,27 @@ export let items: TodoItem[];
 <style>
   .nes-container {
     height: 80vh;
+  }
+
+  .entry {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    display: flex;
+  }
+
+  .label-with-number {
+    max-width: 80vw; 
+    display: inline-flex;
+  }
+
+  .label-index {
+    margin-right: 1rem;
+  }
+
+  .nes-container.with-title>.title {
+    margin-bottom: 0;
+  }
+  .nes-checkbox+span::before, .nes-checkbox:checked+span::before {
+    top: 2px !important;
   }
 </style>
