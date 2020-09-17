@@ -4,6 +4,9 @@
 export let taskListName: string;
 export let items: TodoItem[];
 
+// TODO Either add scrolling up / down
+// TODO or reverse items list 
+
 </script>
 
 <div class="nes-container is-dark with-title">

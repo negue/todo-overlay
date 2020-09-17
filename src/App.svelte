@@ -14,12 +14,24 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
     const realContent = content.join(' ');
 
     switch (subCommand) {
+      case "new": {
+        items.set([]);
+        taskListOptions.update(() => {
+          return {
+            name: realContent
+          };
+        });
+
+        break;
+      }
+
       case "add": {
         const newItem: TodoItem = {
       label: realContent,
       done: false
         };
 
+        // option: add newones to the top
           items.update(curItems => [...curItems, newItem]);
 
         break;
