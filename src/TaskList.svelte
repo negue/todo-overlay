@@ -5,6 +5,7 @@
 
 export let taskListName: string;
 export let items: TodoItem[];
+export let highlightItemIndex = -1;
 export let scrollingInterval = 5000;
 export let scrollingDuration = 2000;
 
@@ -40,10 +41,11 @@ export let scrollingDuration = 2000;
 <div class="nes-container is-dark with-title">
   <p class="title">{taskListName}</p>
 
-  <div class="items-holder" bind:this={itemsListElement}>
+  <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
+       bind:this={itemsListElement}>
   {#each items as item, _index}
 
-      <label class="entry {item.done ? 'entry-done' : ''}" >
+      <label class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
 
 
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
@@ -80,6 +82,17 @@ export let scrollingDuration = 2000;
 
   .entry-done .label {
     text-decoration: line-through;
+  }
+
+  /*TODO  add scss for easier style code */
+
+  .currently-highlighting .entry.entry-highlight {
+
+  }
+
+
+  .currently-highlighting .entry:not(.entry-highlight) {
+    opacity: 0.55;
   }
 
   .items-holder {

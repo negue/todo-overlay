@@ -12,6 +12,7 @@ import {fillDefaults, queryStringToObject} from "./utils";
 // - listening command (default: todo)
 const queryOptions = fillDefaults(queryStringToObject(location.search));
 
+let currentHighlightedIndex = -1;
 
 ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
   if( (flags.broadcaster || flags.mod) && command === queryOptions.command) {
@@ -94,6 +95,17 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         break;
       }
+        case "highlight": {
+            const indexId = stringIdToIndexId(realContent);
+
+            if (currentHighlightedIndex === indexId) {
+                currentHighlightedIndex = -1;
+            } else {
+                currentHighlightedIndex = indexId;
+            }
+
+            break;
+        }
        case "edit": {
 
             const [targetIndex, ...newTextAr] = realContent.split(' ');
@@ -229,7 +241,7 @@ function onDownloadState() {
 <TaskList items={currentItems} taskListName={taskListOptionsObj.name}
           scrollingDuration={queryOptions.scrollingDuration}
           scrollingInterval={queryOptions.scrollingInterval}
-
+          highlightItemIndex={currentHighlightedIndex}
           />
 
 
