@@ -43,13 +43,13 @@ export let scrollingDuration = 2000;
   <div class="items-holder" bind:this={itemsListElement}>
   {#each items as item, _index}
 
-      <label class="entry" >
+      <label class="entry {item.done ? 'entry-done' : ''}" >
 
 
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
         <span class="label-with-number" style="">
           <div style="display: inline-block">
-            <span class="nes-text is-{item.colorName}">
+            <span class="nes-text label is-{item.colorName}">
             {item.label}
             </span>
             <span class="nes-text is-warning">
@@ -72,6 +72,14 @@ export let scrollingDuration = 2000;
 
   .entry {
     display: flex;
+  }
+
+  .entry-done {
+    opacity: 0.55;
+  }
+
+  .entry-done .label {
+    text-decoration: line-through;
   }
 
   .items-holder {
