@@ -1,18 +1,46 @@
 <script lang="ts">
   import type {TodoItem} from './types/item';
+  import * as animateScroll from "svelte-scrollto";
+  import {onMount} from "svelte";
 
 export let taskListName: string;
 export let items: TodoItem[];
+export let scrollingInterval = 5000;
+export let scrollingDuration = 2000;
 
 // TODO Either add scrolling up / down
 // TODO or reverse items list
+
+  let itemsListElement;
+
+  onMount(() => {
+    var scrollToTop = false;
+
+    setInterval(() => {
+      if (scrollToTop) {
+        animateScroll.scrollToTop({
+          container: itemsListElement,
+          duration: scrollingDuration
+        });
+      } else {
+        animateScroll.scrollToBottom({
+          container: itemsListElement,
+          duration: scrollingDuration
+        });
+      }
+
+      scrollToTop = !scrollToTop;
+    }, scrollingInterval);
+
+  });
+
 
 </script>
 
 <div class="nes-container is-dark with-title">
   <p class="title">{taskListName}</p>
 
-  <div class="items-holder">
+  <div class="items-holder" bind:this={itemsListElement}>
   {#each items as item, _index}
 
       <label class="entry" >
@@ -48,6 +76,9 @@ export let items: TodoItem[];
     height: 100%;
     overflow-y: hidden;
     margin-left: -1rem;
+
+    /* additional padding so that it can scroll to it.. "perfectly" */
+    padding-bottom: 1rem;
   }
 
   .label-with-number {

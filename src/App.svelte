@@ -188,11 +188,11 @@ function onDownloadState() {
 
 <main>
 
-<TaskList items={currentItems} taskListName={taskListOptionsObj.name}></TaskList>
+<TaskList items={currentItems} taskListName={taskListOptionsObj.name}
+          scrollingDuration={queryOptions.scrollingDuration}
+          scrollingInterval={queryOptions.scrollingInterval}
 
-
-
-<br> <br>
+          />
 
 
 <!--<button type="button" class="nes-btn is-primary"-->
@@ -212,6 +212,7 @@ function onDownloadState() {
     }
 
    * {
+       /* https://fonts.google.com/specimen/Press+Start+2P?query=Press+Start+2P */
 	   font-family: 'Press Start 2P', cursive;
    }
 
