@@ -207,13 +207,15 @@ function onDownloadState() {
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
+    body {
+        overflow: hidden;
+    }
 
    * {
 	   font-family: 'Press Start 2P', cursive;
    }
 
 	main {
-		padding: 1em;
 
 	}
 

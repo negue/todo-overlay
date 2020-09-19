@@ -5,23 +5,23 @@ export let taskListName: string;
 export let items: TodoItem[];
 
 // TODO Either add scrolling up / down
-// TODO or reverse items list 
+// TODO or reverse items list
 
 </script>
 
 <div class="nes-container is-dark with-title">
   <p class="title">{taskListName}</p>
-  
-  <div>
+
+  <div class="items-holder">
   {#each items as item, _index}
-  
+
       <label class="entry" >
-   
-      
+
+
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-        <span class="label-with-number" style="">          
+        <span class="label-with-number" style="">
           <div style="display: inline-block">
-            {item.label} 
+            {item.label}
             <span class="nes-text is-warning">
               [#{_index + 1}]
             </span>
@@ -36,17 +36,22 @@ export let items: TodoItem[];
 
 <style>
   .nes-container {
-    height: 80vh;
+    height: calc(100vh - 8px);
+    padding-bottom: 0;
   }
 
   .entry {
-    margin-left: -1rem;
-    margin-right: -1rem;
     display: flex;
   }
 
+  .items-holder {
+    height: 100%;
+    overflow-y: hidden;
+    margin-left: -1rem;
+  }
+
   .label-with-number {
-    max-width: 80vw; 
+    max-width: 80vw;
     display: inline-flex;
   }
 
