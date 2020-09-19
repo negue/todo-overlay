@@ -1,15 +1,20 @@
 <script lang="ts">
-	import TaskList from './TaskList.svelte';
-  import {items, taskListOptions} from './items.store';
+import TaskList from './TaskList.svelte';
+import {items, taskListOptions} from './items.store';
 
-  import ComfyJS from "comfy.js";
+import ComfyJS from "comfy.js";
+// import type needs to stay, otherwise svelte says no
 import type { TodoItem } from './types/item';
+import {fillDefaults, queryStringToObject} from "./utils";
 
-
+// Query Options
+// - ChannelName to listen to
+// - listening command (default: todo)
+const queryOptions = fillDefaults(queryStringToObject(location.search));
 
 
 ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-  if( (flags.broadcaster || flags.mod) && command === "todo" ) {
+  if( (flags.broadcaster || flags.mod) && command === queryOptions.command) {
     const [subCommand, ...content] = message.split(' ');
     const realContent = content.join(' ');
 
@@ -41,7 +46,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         if (indexId < 0) {
           return;
-        } 
+        }
 
           items.update(curItems => {
 
@@ -53,7 +58,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
           return curItems;
           });
-     
+
         break;
       }
       case "toggle": {
@@ -61,7 +66,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         if (indexId < 0) {
           return;
-        } 
+        }
 
         items.update(curItems => {
         if (indexId < curItems.length) {
@@ -72,7 +77,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         return curItems;
         });
-    
+
 
         break;
       }
@@ -84,7 +89,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         if (indexId < 0) {
           return;
-        } 
+        }
 
         console.info({targetIndex, indexId, realText})
 
@@ -97,7 +102,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         return curItems;
         });
-    
+
 
         break;
       }
@@ -111,7 +116,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         if (currentIndex < 0 || targetIndex < 0) {
           return;
-        } 
+        }
 
         console.info({currentIndex, targetIndex})
 
@@ -120,7 +125,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         return curItems;
         });
-    
+
 
         break;
       }
@@ -136,12 +141,12 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         break;
       }
     }
-  
+
 
     console.log( "!todo was typed in chat", user, message, flags, extra, subCommand, realContent );
   }
 }
-ComfyJS.Init( "thatn00b__" );
+ComfyJS.Init( queryOptions.channelName );
 
 let currentItems;
 
@@ -174,7 +179,7 @@ let currentItems;
 };
 
 function onDownloadState() {
-  // todo 
+  // todo
   // create a downloadable file URL?
 }
 
@@ -190,8 +195,8 @@ function onDownloadState() {
 <br> <br>
 
 
-<button type="button" class="nes-btn is-primary"
-        on:click={onDownloadState}>Download State</button>
+<!--<button type="button" class="nes-btn is-primary"-->
+<!--        on:click={onDownloadState}>Download State</button>-->
 
 </main>
 
@@ -201,8 +206,8 @@ function onDownloadState() {
 <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-<style> 
-  
+<style>
+
    * {
 	   font-family: 'Press Start 2P', cursive;
    }

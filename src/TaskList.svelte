@@ -50,10 +50,6 @@ export let items: TodoItem[];
     display: inline-flex;
   }
 
-  .label-index {
-    margin-right: 1rem;
-  }
-
   .nes-container.with-title>.title {
     margin-bottom: 0;
   }
