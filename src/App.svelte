@@ -106,6 +106,31 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         break;
       }
+        case "color": {
+
+            const [targetIndex, ...newTextAr] = realContent.split(' ');
+            const realText = newTextAr.join(' ');
+            const indexId = stringIdToIndexId(targetIndex);
+
+            if (indexId < 0) {
+                return;
+            }
+
+            console.info({targetIndex, indexId, realText})
+
+            items.update(curItems => {
+                if (indexId < curItems.length) {
+                    const foundItem = curItems[indexId];
+
+                    foundItem.colorName = realText;
+                }
+
+                return curItems;
+            });
+
+
+            break;
+        }
 
       case "move": {
 
@@ -131,7 +156,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
       }
 
       case "name": {
-
+       // todo list name
        taskListOptions.update(curObj => {
          curObj.name = realContent;
 

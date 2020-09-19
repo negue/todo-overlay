@@ -49,7 +49,9 @@ export let scrollingDuration = 2000;
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
         <span class="label-with-number" style="">
           <div style="display: inline-block">
+            <span class="nes-text is-{item.colorName}">
             {item.label}
+            </span>
             <span class="nes-text is-warning">
               [#{_index + 1}]
             </span>
