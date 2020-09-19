@@ -61,6 +61,19 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
         break;
       }
+        case "cleanup": {
+            const indexId = stringIdToIndexId(realContent);
+
+            if (indexId < 0) {
+                return;
+            }
+
+            items.update(curItems => {
+                return curItems.filter(item => !item.done);
+            });
+
+            break;
+        }
       case "toggle": {
         const indexId = stringIdToIndexId(realContent);
 
