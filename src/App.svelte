@@ -21,6 +21,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
     switch (subCommand) {
       case "new": {
+        // TODO extract item store operations
         items.set([]);
         taskListOptions.update(() => {
           return {
@@ -33,12 +34,12 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
       case "add": {
         const newItem: TodoItem = {
-      label: realContent,
-      done: false
+          label: realContent,
+          done: false
         };
 
         // option: add newones to the top
-          items.update(curItems => [...curItems, newItem]);
+        items.update(curItems => [...curItems, newItem]);
 
         break;
       }
@@ -49,8 +50,7 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
           return;
         }
 
-          items.update(curItems => {
-
+        items.update(curItems => {
           if (indexId < curItems.length) {
             const removedItems = curItems.splice(indexId, 1);
 
@@ -58,23 +58,23 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
           }
 
           return curItems;
-          });
+        });
 
         break;
       }
-        case "cleanup": {
-            const indexId = stringIdToIndexId(realContent);
+      case "cleanup": {
+        const indexId = stringIdToIndexId(realContent);
 
-            if (indexId < 0) {
-                return;
-            }
-
-            items.update(curItems => {
-                return curItems.filter(item => !item.done);
-            });
-
-            break;
+        if (indexId < 0) {
+            return;
         }
+
+        items.update(curItems => {
+            return curItems.filter(item => !item.done);
+        });
+
+        break;
+      }
       case "toggle": {
         const indexId = stringIdToIndexId(realContent);
 
@@ -83,33 +83,31 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         }
 
         items.update(curItems => {
-        if (indexId < curItems.length) {
-          const foundItem = curItems[indexId];
+          if (indexId < curItems.length) {
+            const foundItem = curItems[indexId];
 
-          foundItem.done = !foundItem.done;
-        }
+            foundItem.done = !foundItem.done;
+          }
 
-        return curItems;
+          return curItems;
         });
-
 
         break;
       }
-        case "highlight": {
-            const indexId = stringIdToIndexId(realContent);
+      case "highlight": {
+        const indexId = stringIdToIndexId(realContent);
 
-            if (currentHighlightedIndex === indexId) {
-                currentHighlightedIndex = -1;
-            } else {
-                currentHighlightedIndex = indexId;
-            }
-
-            break;
+        if (currentHighlightedIndex === indexId) {
+          currentHighlightedIndex = -1;
+        } else {
+          currentHighlightedIndex = indexId;
         }
-       case "edit": {
 
-            const [targetIndex, ...newTextAr] = realContent.split(' ');
-    const realText = newTextAr.join(' ');
+        break;
+      }
+      case "edit": {
+        const [targetIndex, ...newTextAr] = realContent.split(' ');
+        const realText = newTextAr.join(' ');
         const indexId = stringIdToIndexId(targetIndex);
 
         if (indexId < 0) {
@@ -119,47 +117,43 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         console.info({targetIndex, indexId, realText})
 
         items.update(curItems => {
-        if (indexId < curItems.length) {
-          const foundItem = curItems[indexId];
+          if (indexId < curItems.length) {
+            const foundItem = curItems[indexId];
 
-          foundItem.label = realText;
-        }
+            foundItem.label = realText;
+          }
 
-        return curItems;
+          return curItems;
         });
-
 
         break;
       }
-        case "color": {
+      case "color": {
+        const [targetIndex, ...newTextAr] = realContent.split(' ');
+        const realText = newTextAr.join(' ');
+        const indexId = stringIdToIndexId(targetIndex);
 
-            const [targetIndex, ...newTextAr] = realContent.split(' ');
-            const realText = newTextAr.join(' ');
-            const indexId = stringIdToIndexId(targetIndex);
-
-            if (indexId < 0) {
-                return;
-            }
-
-            console.info({targetIndex, indexId, realText})
-
-            items.update(curItems => {
-                if (indexId < curItems.length) {
-                    const foundItem = curItems[indexId];
-
-                    foundItem.colorName = realText;
-                }
-
-                return curItems;
-            });
-
-
-            break;
+        if (indexId < 0) {
+            return;
         }
 
-      case "move": {
+        console.info({targetIndex, indexId, realText})
 
-            const [currentIndexStr, targetIndexStr] = realContent.split(' ');
+        items.update(curItems => {
+          if (indexId < curItems.length) {
+              const foundItem = curItems[indexId];
+
+              foundItem.colorName = realText;
+          }
+
+          return curItems;
+        });
+
+        break;
+      }
+
+      case "move": {
+        const [currentIndexStr, targetIndexStr] = realContent.split(' ');
 
         const currentIndex = stringIdToIndexId(currentIndexStr);
         const targetIndex = stringIdToIndexId(targetIndexStr);
@@ -173,25 +167,23 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         items.update(curItems => {
           moveArray(curItems, currentIndex, targetIndex);
 
-        return curItems;
+          return curItems;
         });
-
 
         break;
       }
 
       case "name": {
-       // todo list name
-       taskListOptions.update(curObj => {
-         curObj.name = realContent;
+        // todo list name
+        taskListOptions.update(curObj => {
+          curObj.name = realContent;
 
-         return curObj;
-       });
+          return curObj;
+        });
 
         break;
       }
     }
-
 
     console.log( "!todo was typed in chat", user, message, flags, extra, subCommand, realContent );
   }
@@ -211,63 +203,48 @@ let currentItems;
   });
 
   function stringIdToIndexId (stringId: string) {
-        const parsedId = +stringId;
+    const parsedId = +stringId;
 
-        if (typeof parsedId === 'number') {
-          const indexId = parsedId - 1;
+    if (typeof parsedId === 'number') {
+      const indexId = parsedId - 1;
 
-          if (indexId >= 0) {
-            return indexId;
-          }
-        }
+      if (indexId >= 0) {
+        return indexId;
+      }
+    }
 
     return null;
   }
 
   function moveArray(arr, from, to) {
     arr.splice(to, 0, arr.splice(from, 1)[0]);
-};
+  }
 
-function onDownloadState() {
-  // todo
-  // create a downloadable file URL?
-}
-
-	export let name: string;
 </script>
 
 <main>
 
-<TaskList items={currentItems} taskListName={taskListOptionsObj.name}
-          scrollingDuration={queryOptions.scrollingDuration}
-          scrollingInterval={queryOptions.scrollingInterval}
-          highlightItemIndex={currentHighlightedIndex}
-          />
-
-
-<!--<button type="button" class="nes-btn is-primary"-->
-<!--        on:click={onDownloadState}>Download State</button>-->
+  <TaskList items={currentItems} taskListName={taskListOptionsObj.name}
+            scrollingDuration={queryOptions.scrollingDuration}
+            scrollingInterval={queryOptions.scrollingInterval}
+            highlightItemIndex={currentHighlightedIndex}
+            />
 
 </main>
 
-
-
-<!-- minify -->
+<!-- NES.css minified -->
 <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+
+<!-- Press Start 2P - pixelated font <3 -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        overflow: hidden;
-    }
+  body {
+    overflow: hidden;
+  }
 
-   * {
-       /* https://fonts.google.com/specimen/Press+Start+2P?query=Press+Start+2P */
-	   font-family: 'Press Start 2P', cursive;
-   }
-
-	main {
-
-	}
-
+  * {
+      /* https://fonts.google.com/specimen/Press+Start+2P?query=Press+Start+2P */
+    font-family: 'Press Start 2P', cursive;
+  }
 </style>
