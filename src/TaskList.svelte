@@ -49,7 +49,7 @@ export let scrollingDuration = 2000;
 
 
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-        <span class="label-with-number" style="">
+        <span class="label-with-number">
           <div style="display: inline-block">
             <span class="nes-text label is-{item.colorName}">
             {item.label}
@@ -63,6 +63,10 @@ export let scrollingDuration = 2000;
 
     {/each}
 
+    <label class="entry">
+      &nbsp;
+    </label>
+
         </div>
 </div>
 
@@ -74,6 +78,10 @@ export let scrollingDuration = 2000;
 
   .entry {
     display: flex;
+  }
+
+  .entry:last-of-type {
+    height: 0.5rem;
   }
 
   .entry-done {
@@ -99,9 +107,6 @@ export let scrollingDuration = 2000;
     height: 100%;
     overflow-y: hidden;
     margin-left: -1rem;
-
-    /* additional padding so that it can scroll to it.. "perfectly" */
-    padding-bottom: 1rem;
   }
 
   .label-with-number {

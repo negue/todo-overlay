@@ -12,6 +12,8 @@ import {fillDefaults, queryStringToObject} from "./utils";
 // - listening command (default: todo)
 const queryOptions = fillDefaults(queryStringToObject(location.search));
 
+console.warn({queryOptions});
+
 let currentHighlightedIndex = -1;
 
 ComfyJS.onCommand = ( user, command, message, flags, extra ) => {

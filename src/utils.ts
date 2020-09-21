@@ -20,10 +20,14 @@ export function queryStringToObject(queryString: string) {
 
 export function numberOrDefault(value: number|string, defaultNumber: number) {
   if (typeof value ===  'number') {
-      return value;
+    return value;
   }
 
-  return Number(value) ?? defaultNumber;
+  if (typeof value === 'string') {
+    return Number(value) ?? defaultNumber;
+  }
+
+  return defaultNumber;
 }
 
 export function fillDefaults(currentOptions: QueryOptions): QueryOptions {
