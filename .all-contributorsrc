@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "gigili",
+      "name": "Igor Ilic",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2153382?v=4",
+      "profile": "https://twitch.tv/gacbl",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "todo-overlay",
+  "projectOwner": "negue",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
