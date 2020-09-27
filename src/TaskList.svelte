@@ -51,7 +51,7 @@ export let scrollingDuration = 2000;
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
         <span class="label-with-number">
           <div style="display: inline-block">
-            <span class="nes-text label is-{item.colorName}">
+            <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
             {item.label}
             </span>
             <span class="nes-text is-warning">

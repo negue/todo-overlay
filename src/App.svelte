@@ -145,7 +145,12 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
           if (indexId < curItems.length) {
               const foundItem = curItems[indexId];
 
-              foundItem.colorName = realText;
+			  if (realText.startsWith("#") || realText.startsWith("rgb")) {
+				  foundItem.colorStyle = `color: ${realText}`;
+			  } else {
+				  foundItem.colorStyle = "";
+				  foundItem.colorName = realText;
+			  }
           }
 
           return curItems;
