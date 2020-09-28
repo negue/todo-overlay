@@ -1,20 +1,22 @@
 <script lang="ts">
 import TaskList from './TaskList.svelte';
-import {items, taskListOptions} from './items.store';
+import {createStore} from './items.store';
 
 import ComfyJS from "comfy.js";
 // import type needs to stay, otherwise svelte says no
 import type { TodoItem } from './types/item';
-import {fillDefaults, queryStringToObject} from "./utils";
+import {fillDefaults, queryStringToQueryOptions} from "./utils";
 
 // Query Options
 // - ChannelName to listen to
 // - listening command (default: todo)
-const queryOptions = fillDefaults(queryStringToObject(location.search));
+const queryOptions = fillDefaults(queryStringToQueryOptions(location.search));
 
 console.warn({queryOptions});
 
 let currentHighlightedIndex = -1;
+
+const {items, taskListOptions} = createStore(queryOptions.command);
 
 ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
   if( (flags.broadcaster || flags.mod) && command === queryOptions.command) {
@@ -37,7 +39,9 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
       case "add": {
         const newItem: TodoItem = {
           label: realContent,
-          done: false
+          done: false,
+          colorName: '',
+          colorStyle: null
         };
 
         // option: add newones to the top
@@ -209,6 +213,8 @@ let currentItems;
     taskListOptionsObj = value;
   });
 
+
+  // todo move functions to utils
   function stringIdToIndexId (stringId: string) {
     const parsedId = +stringId;
 
@@ -252,6 +258,6 @@ let currentItems;
 
   * {
       /* https://fonts.google.com/specimen/Press+Start+2P?query=Press+Start+2P */
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', Arial, sans-serif;
   }
 </style>

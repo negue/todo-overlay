@@ -6,7 +6,7 @@ export interface QueryOptions {
 }
 
 
-export function queryStringToObject(queryString: string) {
+export function queryStringToQueryOptions(queryString: string): QueryOptions {
     return queryString.replace('?', '').split('&').map(entry => {
         const [optionName, optionValue] = entry.split('=');
 
@@ -15,7 +15,7 @@ export function queryStringToObject(queryString: string) {
         targetObject[currentValue.optionName] = currentValue.optionValue;
 
         return targetObject;
-    }, {} /* targetObject */)
+    }, {} as QueryOptions /* targetObject */)
 }
 
 export function numberOrDefault(value: number|string, defaultNumber: number) {
