@@ -36,19 +36,6 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         break;
       }
 
-      case "add": {
-        const newItem: TodoItem = {
-          label: realContent,
-          done: false,
-          colorName: '',
-          colorStyle: null
-        };
-
-        // option: add newones to the top
-        items.update(curItems => [...curItems, newItem]);
-
-        break;
-      }
       case "remove": {
         const indexId = stringIdToIndexId(realContent);
 
@@ -191,6 +178,32 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
 
           return curObj;
         });
+
+        break;
+      }
+      case "add": {
+        const newItem: TodoItem = {
+          label: realContent,
+          done: false,
+          colorName: '',
+          colorStyle: null
+        };
+
+        // option: add newones to the top
+        items.update(curItems => [...curItems, newItem]);
+
+        break;
+      }
+      default: {
+        const newItem: TodoItem = {
+          label: message,
+          done: false,
+          colorName: '',
+          colorStyle: null
+        };
+
+        // option: add newones to the top
+        items.update(curItems => [...curItems, newItem]);
 
         break;
       }
