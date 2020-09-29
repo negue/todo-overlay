@@ -48,6 +48,7 @@ Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
    Use your the same Overlay-URL in your custom OBS-Docks. Then you can it on stream and in your OBS.
 
 2. You can use multiple commands on separated browser sources, so if you want to have `!todo` (on stream) and a `!later` to do it after :) 
+   > Note: You need to change the URL with `&command=later` accordingly
 
 ## Contributors ✨
 
