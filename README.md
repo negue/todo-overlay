@@ -24,7 +24,9 @@ https://negue.github.io/todo-overlay/?channelName=yourName
 
 The broadcaster and mods can execute these commands
 
-Syntax: `!COMMAND SUBCOMMAND [ID / TEXT]`
+`!COMMAND TEXT` is a shortcut for `!COMMAND add TEXT`
+
+Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
 
 |SUBCOMMAND|Description|
 |-|-|
@@ -32,14 +34,21 @@ Syntax: `!COMMAND SUBCOMMAND [ID / TEXT]`
 |`name TITLE`|Renames the list to TITLE|
 |`add TEXT`|Adds a new entry with the TEXT|
 |`edit POSITION TEXT`|Changes the text of POSITION to the new TEXT|
-|`color POSITION COLOR`|Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) of POSITION|
+|`color POSITION COLOR`|Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) or any `#RRGGBB` / `rgb() / rgba()` values of POSITION|
 |`move POSITION NEWPOSITION`|Move entry of POSITION to NEWPOSITION|
 |`remove POSITION`|Removes the entry at POSITION|
 |`toggle POSITION`|Toggles the entry at POSITION|
 |`highlight POSITION`|Changes all other than POSITION to a lower opacity|
 |`cleanup`|Removes all "done" entries|
 
+## Protips :
 
+1. (Windows only)
+
+   Use your the same Overlay-URL in your custom OBS-Docks. Then you can it on stream and in your OBS.
+
+2. You can use multiple commands on separated browser sources, so if you want to have `!todo` (on stream) and a `!later` to do it after :) 
+   > Note: You need to change the URL with `&command=later` accordingly
 
 ## Contributors ✨
 
