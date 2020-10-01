@@ -69,21 +69,31 @@ ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
         break;
       }
       case "toggle": {
-        const indexId = stringIdToIndexId(realContent);
-
-        if (indexId < 0) {
-          return;
+        let todoIndexes = [];
+        if (realContent.indexOf(",") !== -1) {
+          todoIndexes = realContent.split(",");
+        } else {
+          todoIndexes = [realContent];
         }
 
-        items.update(curItems => {
-          if (indexId < curItems.length) {
-            const foundItem = curItems[indexId];
+        for (const todoIndex of todoIndexes) {
+          const indexId = stringIdToIndexId(todoIndex);
 
-            foundItem.done = !foundItem.done;
+          if (indexId < 0) {
+            return;
           }
 
-          return curItems;
-        });
+          items.update(curItems => {
+            if (indexId < curItems.length) {
+              const foundItem = curItems[indexId];
+              if(foundItem) {
+                foundItem.done = !foundItem.done;
+              }
+            }
+
+            return curItems;
+          });
+        }
 
         break;
       }
