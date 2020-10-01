@@ -86,9 +86,9 @@
 						items.update(curItems => {
 							if (indexId < curItems.length) {
 								const foundItem = curItems[indexId];
-								if(foundItem) {
-                  foundItem.done = !foundItem.done;
-                }
+								if (foundItem) {
+									foundItem.done = !foundItem.done;
+								}
 							}
 
 							return curItems;
@@ -260,11 +260,11 @@
 
 <main>
 
-    <TaskList items={currentItems} taskListName={taskListOptionsObj.name}
-              scrollingDuration={queryOptions.scrollingDuration}
-              scrollingInterval={queryOptions.scrollingInterval}
-              highlightItemIndex={currentHighlightedIndex}
-    />
+  <TaskList items={currentItems} taskListName={taskListOptionsObj.name}
+            scrollingDuration={queryOptions.scrollingDuration}
+            scrollingInterval={queryOptions.scrollingInterval}
+            highlightItemIndex={currentHighlightedIndex}
+  />
 
 </main>
 
