@@ -37,7 +37,7 @@ Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
 |`color POSITION COLOR`||Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) or any `#RRGGBB` / `rgb() / rgba()` values of `POSITION` |
 |`move POSITION NEWPOSITION`|`mv`|Move entry of `POSITION`  to `NEWPOSITION` |
 |`remove POSITION`|`mv`|Removes the entry at `POSITION` |
-|`toggle POSITION`||Toggles the entry at `POSITION` |
+|`toggle POSITION`||Toggles the entry at `POSITION` , it can also be a comma separated list of positions|
 |`highlight POSITION`|`hl`|Changes all other than `POSITION`  to a lower opacity|
 |`cleanup`||Removes all "done" entries|
 
@@ -48,6 +48,7 @@ Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
    Use your the same Overlay-URL in your custom OBS-Docks. Then you can it on stream and in your OBS.
 
 2. You can use multiple commands on separated browser sources, so if you want to have `!todo` (on stream) and a `!later` to do it after :) 
+   > Note: You need to change the URL with `&command=later` accordingly
 
 ## Contributors ✨
 
