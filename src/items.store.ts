@@ -45,7 +45,8 @@ export function createStore(command: string) {
 
   return {
     taskListOptions,
-    items
+    items,
+    currentHighlight: writable(-1)
   };
 }
 

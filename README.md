@@ -28,18 +28,18 @@ The broadcaster and mods can execute these commands
 
 Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
 
-|SUBCOMMAND|Description|
-|-|-|
-|`new TITLE`|Resets the todo list and sets the name to TITLE|
-|`name TITLE`|Renames the list to TITLE|
-|`add TEXT`|Adds a new entry with the TEXT|
-|`edit POSITION TEXT`|Changes the text of POSITION to the new TEXT|
-|`color POSITION COLOR`|Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) or any `#RRGGBB` / `rgb() / rgba()` values of POSITION|
-|`move POSITION NEWPOSITION`|Move entry of POSITION to NEWPOSITION|
-|`remove POSITION`|Removes the entry at POSITION|
-|`toggle POSITION`|Toggles the entry at POSITION, it can also be a comma separated list of positions|
-|`highlight POSITION`|Changes all other than POSITION to a lower opacity|
-|`cleanup`|Removes all "done" entries|
+|SUBCOMMAND|Shortcut|Description|
+|-|-|-|
+|`new TITLE`||Resets the todo list and sets the name to `TITLE`|
+|`name TITLE`||Renames the list to `TITLE`|
+|`add TEXT`||Adds a new entry with the `TEXT`|
+|`edit POSITION TEXT`|`e`|Changes the text of `POSITION` to the new `TEXT`|
+|`color POSITION COLOR`||Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) or any `#RRGGBB` / `rgb() / rgba()` values of `POSITION` |
+|`move POSITION NEWPOSITION`|`mv`|Move entry of `POSITION`  to `NEWPOSITION` |
+|`remove POSITION`|`mv`|Removes the entry at `POSITION` |
+|`toggle POSITION`||Toggles the entry at `POSITION` , it can also be a comma separated list of positions|
+|`highlight POSITION`|`hl`|Changes all other than `POSITION`  to a lower opacity|
+|`cleanup`||Removes all "done" entries|
 
 ## Protips :
 
