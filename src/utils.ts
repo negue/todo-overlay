@@ -3,6 +3,7 @@ export interface QueryOptions {
     command: string;
     scrollingInterval: number;
     scrollingDuration: number;
+    layout: string;
 }
 
 

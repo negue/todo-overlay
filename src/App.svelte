@@ -33,6 +33,7 @@
             taskListName={$taskListOptions.name}
             scrollingDuration={queryOptions.scrollingDuration}
             scrollingInterval={queryOptions.scrollingInterval}
+            layout={queryOptions.layout}
             highlightItemIndex={$currentHighlight}
   />
 </main>
