@@ -81,7 +81,6 @@ export let layout = 'full';
     height: 100%;
     max-height: 100vh;
     width: fit-content;
-    transition: height 5s ease-in-out;
   }
 
   .entry {
