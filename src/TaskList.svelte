@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { TodoItem } from './types/item';
-  import * as animateScroll from 'svelte-scrollto';
-  import { onMount } from 'svelte';
+  import type {TodoItem} from './types/item';
+  import * as animateScroll from "svelte-scrollto";
+  import {onMount} from "svelte";
 
-  export let taskListName: string;
-  export let items: TodoItem[];
-  export let highlightItemIndex = -1;
-  export let scrollingInterval = 5000;
-  export let scrollingDuration = 2000;
+export let taskListName: string;
+export let items: TodoItem[];
+export let highlightItemIndex = -1;
+export let scrollingInterval = 5000;
+export let scrollingDuration = 2000;
 
-  // TODO Either add scrolling up / down
-  // TODO or reverse items list
+// TODO Either add scrolling up / down
+// TODO or reverse items list
 
   let itemsListElement;
 
@@ -32,8 +32,43 @@
 
       scrollToTop = !scrollToTop;
     }, scrollingInterval);
+
   });
+
+
 </script>
+
+<div class="nes-container is-dark with-title">
+  <p class="title">{taskListName}</p>
+
+  <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
+       bind:this={itemsListElement}>
+  {#each items as item, _index}
+
+      <label class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
+
+
+        <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
+        <span class="label-with-number">
+          <div style="display: inline-block">
+            <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
+            {item.label}
+            </span>
+            <span class="nes-text is-warning">
+              [#{_index + 1}]
+            </span>
+          </div>
+        </span>
+    </label>
+
+    {/each}
+
+    <label class="entry">
+      &nbsp;
+    </label>
+
+        </div>
+</div>
 
 <style>
   .nes-container {
@@ -43,7 +78,6 @@
 
   .entry {
     display: flex;
-    opacity: 1;
     user-select: none;
   }
 
@@ -62,6 +96,7 @@
   /*TODO  add scss for easier style code */
 
   .currently-highlighting .entry.entry-highlight {
+
   }
 
   .entry:not(.entry-done):not(.entry-highlight) {
@@ -69,6 +104,7 @@
     animation-direction: forwards;
     animation-duration: 0.5s;
   }
+
 
   .currently-highlighting .entry:not(.entry-highlight) {
     opacity: 0.55;
@@ -85,51 +121,15 @@
     display: inline-flex;
   }
 
-  .nes-container.with-title > .title {
+  .nes-container.with-title>.title {
     margin-bottom: 0;
   }
-  .nes-checkbox + span::before,
-  .nes-checkbox:checked + span::before {
+  .nes-checkbox+span::before, .nes-checkbox:checked+span::before {
     top: 2px !important;
   }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from{ opacity: 0 }
+    to{ opacity: 1 }
   }
 </style>
-
-<div class="nes-container is-dark with-title">
-  <p class="title">{taskListName}</p>
-
-  <div
-    class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : ''}"
-    bind:this={itemsListElement}>
-    {#each items as item, _index}
-      <label
-        class="entry {item.done ? 'entry-done' : ''}
-          {_index === highlightItemIndex ? 'entry-highlight' : ''}">
-        <input
-          type="checkbox"
-          class="nes-checkbox is-dark"
-          checked={item.done} />
-        <span class="label-with-number">
-          <div style="display: inline-block">
-            <span
-              class="nes-text label is-{item.colorName}"
-              style={item.colorStyle}>
-              {item.label}
-            </span>
-            <span class="nes-text is-warning"> [#{_index + 1}] </span>
-          </div>
-        </span>
-      </label>
-    {/each}
-
-    <label class="entry"> &nbsp; </label>
-  </div>
-</div>
