@@ -16,6 +16,7 @@ https://negue.github.io/todo-overlay/?channelName=yourName
 |Option|Description|
 |-|-|
 |`&command=todo`|The command that should react from twitch chat - Default `todo`|
+|`&layout=auto`|Switch displays between a full sized layout and an auto-sized layout - Default `full` - Auto `auto`|
 |`&scrollingInterval=5000`|Time in ms, when the next scrolling to top/bottom will be triggered, this only happens when the view is smaller then entries inside. |
 |`&scrollingDuration=2000`|Time in ms, how long the scroll animation should|
 
