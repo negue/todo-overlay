@@ -78,6 +78,7 @@ export let scrollingDuration = 2000;
 
   .entry {
     display: flex;
+    user-select: none;
   }
 
   .entry:last-of-type {
@@ -96,6 +97,12 @@ export let scrollingDuration = 2000;
 
   .currently-highlighting .entry.entry-highlight {
 
+  }
+
+  .entry:not(.entry-done):not(.entry-highlight) {
+    animation-name: fadeIn;
+    animation-direction: forwards;
+    animation-duration: 0.5s;
   }
 
 
@@ -119,5 +126,10 @@ export let scrollingDuration = 2000;
   }
   .nes-checkbox+span::before, .nes-checkbox:checked+span::before {
     top: 2px !important;
+  }
+
+  @keyframes fadeIn {
+    from{ opacity: 0 }
+    to{ opacity: 1 }
   }
 </style>
