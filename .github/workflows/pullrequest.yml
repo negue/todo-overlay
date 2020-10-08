@@ -24,10 +24,16 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run validate
+      - name: Uploading Dist Files
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: public
+
       - name: Deploy Preview
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          destination_dir: pr_${{ github.event.number }}
-          keep_files: true
+          destination_dir: ./pr_${{ github.event.number }}
+          keep_files: false
