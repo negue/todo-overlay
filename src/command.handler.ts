@@ -194,8 +194,15 @@ export function handleCommand(message: string,
     }
 
     case "stop": {
+      const [targetIndexStr, ...rest] = realContent.split(' ');
+
+      const targetIndex = stringIdToIndexId(targetIndexStr);
 
       currentTimer.update(currentItemIndex => {
+
+        if (currentItemIndex == -1) {
+          currentItemIndex = targetIndex;
+        }
 
         items.update(curItems => {
           const currentItem = curItems[currentItemIndex];
