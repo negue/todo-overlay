@@ -8,6 +8,7 @@ export let items: TodoItem[];
 export let highlightItemIndex = -1;
 export let scrollingInterval = 5000;
 export let scrollingDuration = 2000;
+export let layout = 'full';
 
 // TODO Either add scrolling up / down
 // TODO or reverse items list
@@ -38,7 +39,7 @@ export let scrollingDuration = 2000;
 
 </script>
 
-<div class="nes-container is-dark with-title">
+<div class="nes-container {layout === 'auto' ? 'auto-layout' : ''} is-dark with-title">
   <p class="title">{taskListName}</p>
 
   <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
@@ -74,6 +75,11 @@ export let scrollingDuration = 2000;
   .nes-container {
     height: calc(100vh - 8px);
     padding-bottom: 0;
+  }
+
+  .nes-container.auto-layout {
+    height: 100%;
+    max-height: 100vh;
   }
 
   .entry {
