@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {TodoItem} from './types/item';
   import * as animateScroll from "svelte-scrollto";
+  import { fade, fly } from 'svelte/transition'
   import {onMount} from "svelte";
 
 export let taskListName: string;
@@ -42,33 +43,33 @@ export let layout = 'full';
 <div class="nes-container {layout === 'auto' ? 'auto-layout' : ''} is-dark with-title">
   <p class="title">{taskListName}</p>
 
-  <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
-       bind:this={itemsListElement}>
-  {#each items as item, _index}
+  <div 
+    class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
+    bind:this={itemsListElement}>
+  
+    {#each items as item, _index}
 
-      <label class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
-
-
-        <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-        <span class="label-with-number">
-          <div style="display: inline-block">
-            <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
-            {item.label}
-            </span>
-            <span class="nes-text is-warning">
-              [#{_index + 1}]
-            </span>
-          </div>
-        </span>
-    </label>
+      <label
+        in:fade={{ duration: 500 }}
+        out:fly={{ x: -500, duration: 500 }}
+        class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
+          <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
+          <span class="label-with-number">
+            <div style="display: inline-block">
+              <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
+              {item.label}
+              </span>
+              <span class="nes-text is-warning">
+                [#{_index + 1}]
+              </span>
+            </div>
+          </span>
+      </label>
 
     {/each}
 
-    <label class="entry">
-      &nbsp;
-    </label>
-
-        </div>
+    <label class="entry">&nbsp;</label>
+  </div>
 </div>
 
 <style>
@@ -105,13 +106,6 @@ export let layout = 'full';
 
   }
 
-  .entry:not(.entry-done):not(.entry-highlight) {
-    animation-name: fadeIn;
-    animation-direction: forwards;
-    animation-duration: 0.5s;
-  }
-
-
   .currently-highlighting .entry:not(.entry-highlight) {
     opacity: 0.55;
   }
@@ -134,8 +128,4 @@ export let layout = 'full';
     top: 2px !important;
   }
 
-  @keyframes fadeIn {
-    from{ opacity: 0 }
-    to{ opacity: 1 }
-  }
 </style>
