@@ -1,4 +1,6 @@
 <script lang="ts">
+  import TimeDifference from './TimeDifference.svelte';
+  import {timeDifference} from "./utils";
   import type {TodoItem} from './types/item';
   import * as animateScroll from "svelte-scrollto";
   import { fade, fly } from 'svelte/transition'
@@ -7,6 +9,7 @@
 export let taskListName: string;
 export let items: TodoItem[];
 export let highlightItemIndex = -1;
+export let showOnlyItemIndex = -1;
 export let scrollingInterval = 5000;
 export let scrollingDuration = 2000;
 export let layout = 'full';
@@ -43,29 +46,50 @@ export let layout = 'full';
 <div class="nes-container {layout === 'auto' ? 'auto-layout' : ''} is-dark with-title">
   <p class="title">{taskListName}</p>
 
-  <div 
+  <div
     class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
     bind:this={itemsListElement}>
-  
+
     {#each items as item, _index}
 
-      <label
-        in:fade={{ duration: 500 }}
-        out:fly={{ x: -500, duration: 500 }}
-        class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
-          <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-          <span class="label-with-number">
-            <div style="display: inline-block">
-              <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
-              {item.label}
-              </span>
-              <span class="nes-text is-warning">
-                [#{_index + 1}]
-              </span>
-            </div>
-          </span>
-      </label>
+      {#if showOnlyItemIndex === -1 || showOnlyItemIndex === _index }
+        <label
+          in:fade={{ duration: 500 }}
+          out:fly={{ x: -500, duration: 500 }}
+          class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
+            <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
+            <span class="label-with-number">
+              <div style="display: inline-block">
+                <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
+                {item.label}
+                </span>
+                <span class="nes-text is-warning">
+                  [#{_index + 1}]
+                </span>
+              </div>
 
+              <br/>
+
+            </span>
+        </label>
+
+        {#if item.startTime || item.spentTime}
+          <div class="timer-badges"
+               in:fade={{ duration: 500 }}
+               out:fly={{ x: -500, duration: 500 }}>
+            {#if item.startTime}
+              <TimeDifference startDate="{item.startTime}"/>
+            {/if}
+
+            {#if item.spentTime}
+              <div class="nes-badge is-splited">
+                <span class="is-warning">Spent</span>
+                <span class="is-success">{timeDifference(item.spentTime).string}</span>
+              </div>
+            {/if}
+          </div>
+        {/if}
+      {/if}
     {/each}
 
     <label class="entry">&nbsp;</label>
@@ -126,6 +150,11 @@ export let layout = 'full';
   }
   .nes-checkbox+span::before, .nes-checkbox:checked+span::before {
     top: 2px !important;
+  }
+
+  .timer-badges {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
 </style>

@@ -46,7 +46,8 @@ export function createStore(command: string) {
   return {
     taskListOptions,
     items,
-    currentHighlight: writable(-1)
+    currentHighlight: writable(-1),  // these are still IndexIDs, TODO change to GUID
+    currentTimer: writable(-1),
   };
 }
 
