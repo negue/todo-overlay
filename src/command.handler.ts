@@ -51,6 +51,7 @@ export function handleCommand (message: string,
         return;
       }
 
+      currentHighlight.update(_ => -1);
       items.update(curItems => {
         return curItems.filter(item => !item.done);
       });
@@ -71,6 +72,9 @@ export function handleCommand (message: string,
         if (indexId < 0) {
           return;
         }
+
+
+        currentHighlight.update(value => value == indexId ? -1 : value);
 
         items.update(curItems => {
           if (indexId < curItems.length) {
