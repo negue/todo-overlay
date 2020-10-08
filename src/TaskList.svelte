@@ -42,31 +42,33 @@ export let scrollingDuration = 2000;
 <div class="nes-container is-dark with-title">
   <p class="title">{taskListName}</p>
 
-  <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
-  bind:this={itemsListElement}>
-  {#each items as item, _index}
+  <div 
+    class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
+    bind:this={itemsListElement}>
+  
+    {#each items as item, _index}
 
-    <label
-      in:fade={{ duration: 500 }}
-      out:fly={{ x: -500, duration: 500 }}
-      class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
-        <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
-        <span class="label-with-number">
-          <div style="display: inline-block">
-            <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
-            {item.label}
-            </span>
-            <span class="nes-text is-warning">
-              [#{_index + 1}]
-            </span>
-          </div>
-        </span>
-    </label>
+      <label
+        in:fade={{ duration: 500 }}
+        out:fly={{ x: -500, duration: 500 }}
+        class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
+          <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
+          <span class="label-with-number">
+            <div style="display: inline-block">
+              <span class="nes-text label is-{item.colorName}" style="{item.colorStyle}">
+              {item.label}
+              </span>
+              <span class="nes-text is-warning">
+                [#{_index + 1}]
+              </span>
+            </div>
+          </span>
+      </label>
 
-  {/each}
+    {/each}
 
-  <label class="entry">&nbsp;</label>
-    </div>
+    <label class="entry">&nbsp;</label>
+  </div>
 </div>
 
 <style>
