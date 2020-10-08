@@ -14,11 +14,12 @@
 
   console.warn({ queryOptions });
 
-  const { items, taskListOptions, currentHighlight } = createStore(queryOptions.command);
+  const { items, taskListOptions, currentHighlight, currentTimer } = createStore(queryOptions.command);
 
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     if ((flags.broadcaster || flags.mod) && command === queryOptions.command) {
-      handleCommand(message, taskListOptions, items, currentHighlight);
+      // better state management?!
+      handleCommand(message, taskListOptions, items, currentHighlight, currentTimer);
 
       console.log(`!${queryOptions.command} was typed in chat`, user, message, flags, extra);
     }
@@ -35,6 +36,7 @@
             scrollingInterval={queryOptions.scrollingInterval}
             layout={queryOptions.layout}
             highlightItemIndex={$currentHighlight}
+            showOnlyItemIndex={$currentTimer}
   />
 </main>
 

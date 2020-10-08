@@ -4,10 +4,11 @@ import type { TaskListOptions } from "./items.store";
 
 // todo tests
 
-export function handleCommand (message: string,
-                               taskListOptions: Writable<TaskListOptions>,
-                               items: Writable<TodoItem[]>,
-                               currentHighlight: Writable<number>) {
+export function handleCommand(message: string,
+                              taskListOptions: Writable<TaskListOptions>,
+                              items: Writable<TodoItem[]>,
+                              currentHighlight: Writable<number>,
+                              currentTimer: Writable<number>) {
   const [subCommand, ...content] = message.split(' ');
   const realContent = content.join(' ');
 
@@ -175,6 +176,58 @@ export function handleCommand (message: string,
 
         return curItems;
       });
+
+      break;
+    }
+
+    case "start": {
+      const [targetIndexStr, ...rest] = realContent.split(' ');
+
+      const targetIndex = stringIdToIndexId(targetIndexStr);
+
+      currentTimer.update(_ => targetIndex);
+
+      items.update(curItems => {
+        const currentItem = curItems[targetIndex];
+        currentItem.startTime = Date.now();
+
+        return curItems;
+      });
+
+      break;
+    }
+
+    case "stop": {
+      const [targetIndexStr, ...rest] = realContent.split(' ');
+
+      const targetIndex = stringIdToIndexId(targetIndexStr);
+
+      currentTimer.update(currentItemIndex => {
+
+        if (currentItemIndex == -1) {
+          currentItemIndex = targetIndex;
+        }
+
+        items.update(curItems => {
+          const currentItem = curItems[currentItemIndex];
+
+          if (!currentItem.spentTime) {
+            currentItem.spentTime = 0;
+          }
+
+          const currentTime =  Date.now();
+
+          // Add the difference but without milliseconds
+          currentItem.spentTime += (currentTime - currentItem.startTime) / 1000;
+
+          currentItem.startTime = null;
+
+          return curItems;
+        });
+
+        return -1;
+      });
+
 
       break;
     }
