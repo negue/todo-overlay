@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {TodoItem} from './types/item';
   import * as animateScroll from "svelte-scrollto";
+  import { fade, fly } from 'svelte/transition'
   import {onMount} from "svelte";
 
 export let taskListName: string;
@@ -42,12 +43,13 @@ export let scrollingDuration = 2000;
   <p class="title">{taskListName}</p>
 
   <div class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
-       bind:this={itemsListElement}>
+  bind:this={itemsListElement}>
   {#each items as item, _index}
 
-      <label class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
-
-
+    <label
+      in:fade={{ duration: 500 }}
+      out:fly={{ x: -500, duration: 500 }}
+      class="entry {item.done ? 'entry-done' : ''} {_index === highlightItemIndex ? 'entry-highlight' : ''}" >
         <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
         <span class="label-with-number">
           <div style="display: inline-block">
@@ -61,13 +63,10 @@ export let scrollingDuration = 2000;
         </span>
     </label>
 
-    {/each}
+  {/each}
 
-    <label class="entry">
-      &nbsp;
-    </label>
-
-        </div>
+  <label class="entry">&nbsp;</label>
+    </div>
 </div>
 
 <style>
@@ -99,13 +98,6 @@ export let scrollingDuration = 2000;
 
   }
 
-  .entry:not(.entry-done):not(.entry-highlight) {
-    animation-name: fadeIn;
-    animation-direction: forwards;
-    animation-duration: 0.5s;
-  }
-
-
   .currently-highlighting .entry:not(.entry-highlight) {
     opacity: 0.55;
   }
@@ -128,8 +120,4 @@ export let scrollingDuration = 2000;
     top: 2px !important;
   }
 
-  @keyframes fadeIn {
-    from{ opacity: 0 }
-    to{ opacity: 1 }
-  }
 </style>
