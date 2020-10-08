@@ -44,7 +44,7 @@ export let layout = 'full';
 </script>
 
 <div class="nes-container {layout === 'auto' ? 'auto-layout' : ''} is-dark with-title">
-  <p class="title">{taskListName}</p>
+  <p class="title">Test Change {taskListName}</p>
 
   <div
     class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : '' }"
