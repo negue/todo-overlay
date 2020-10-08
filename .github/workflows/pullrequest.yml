@@ -35,5 +35,5 @@ jobs:
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          destination_dir: ./pr_${{ github.event.number }}/
-          keep_files: true
+          destination_dir: ./pr_${{ github.event.number }}
+          keep_files: false
