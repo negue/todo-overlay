@@ -80,8 +80,6 @@ export let layout = 'full';
   .nes-container.auto-layout {
     height: 100%;
     max-height: 100vh;
-    width: fit-content;
-    max-width: 100%;
   }
 
   .entry {
