@@ -37,9 +37,11 @@ Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
 |`edit POSITION TEXT`|`e`|Changes the text of `POSITION` to the new `TEXT`|
 |`color POSITION COLOR`||Changes the color [see Texts of NES.css](https://nostalgic-css.github.io/NES.css/) or any `#RRGGBB` / `rgb() / rgba()` values of `POSITION` |
 |`move POSITION NEWPOSITION`|`mv`|Move entry of `POSITION`  to `NEWPOSITION` |
-|`remove POSITION`|`mv`|Removes the entry at `POSITION` |
+|`remove POSITION`|`rm`|Removes the entry at `POSITION` |
 |`toggle POSITION`||Toggles the entry at `POSITION` , it can also be a comma separated list of positions|
 |`highlight POSITION`|`hl`|Changes all other than `POSITION`  to a lower opacity|
+|`start POSITION`||Starts a timer at `POSITION`|
+|`stop [POSITION]`|| Stops the current timer, or optionally at `POSITION`|
 |`cleanup`||Removes all "done" entries|
 
 ## Protips :
