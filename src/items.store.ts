@@ -1,9 +1,6 @@
 import { writable } from 'svelte/store';
-import type {TodoItem} from './types/item';
-
-export interface TaskListOptions {
-  name: string;
-}
+import type { TodoItem } from './types/item';
+import type { TodoList } from './types/list';
 
 const previousOptionsKey = 'options';
 const previousItemsKey = 'items';
@@ -18,10 +15,10 @@ export function createStore(command: string) {
     // if the command store is empty, use the previous one
     commandOptionsValue = readJsonFromStorage(previousOptionsKey, {
       name: `!${command} new Title`
-    } as TaskListOptions);
+    } as TodoList);
 
 
-  console.info({commandOptionsValue});
+    console.info({ commandOptionsValue });
 
     // reset the old one
     writeJsonToStorage(previousOptionsKey, null);
@@ -37,7 +34,7 @@ export function createStore(command: string) {
     writeJsonToStorage(previousItemsKey, null);
   }
 
-  const taskListOptions = writable<TaskListOptions>(commandOptionsValue);
+  const taskListOptions = writable<TodoList>(commandOptionsValue);
   taskListOptions.subscribe(val => writeJsonToStorage(commandOptionsKey, val));
 
   const items = writable<TodoItem[]>(commandItemsValue);

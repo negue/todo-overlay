@@ -1,14 +1,14 @@
 import type { TodoItem } from "./types/item";
 import type { Writable } from "svelte/store";
-import type { TaskListOptions } from "./items.store";
+import type { TodoList } from "./types/list";
 
 // todo tests
 
 export function handleCommand(message: string,
-                              taskListOptions: Writable<TaskListOptions>,
-                              items: Writable<TodoItem[]>,
-                              currentHighlight: Writable<number>,
-                              currentTimer: Writable<number>) {
+  taskListOptions: Writable<TodoList>,
+  items: Writable<TodoItem[]>,
+  currentHighlight: Writable<number>,
+  currentTimer: Writable<number>) {
   const [subCommand, ...content] = message.split(' ');
   const realContent = content.join(' ');
 
@@ -115,7 +115,7 @@ export function handleCommand(message: string,
         return;
       }
 
-      console.info({targetIndex, indexId, realText})
+      console.info({ targetIndex, indexId, realText })
 
       items.update(curItems => {
         if (indexId < curItems.length) {
@@ -138,7 +138,7 @@ export function handleCommand(message: string,
         return;
       }
 
-      console.info({targetIndex, indexId, realText})
+      console.info({ targetIndex, indexId, realText })
 
       items.update(curItems => {
         if (indexId < curItems.length) {
@@ -169,7 +169,7 @@ export function handleCommand(message: string,
         return;
       }
 
-      console.info({currentIndex, targetIndex})
+      console.info({ currentIndex, targetIndex })
 
       items.update(curItems => {
         moveArray(curItems, currentIndex, targetIndex);
@@ -215,7 +215,7 @@ export function handleCommand(message: string,
             currentItem.spentTime = 0;
           }
 
-          const currentTime =  Date.now();
+          const currentTime = Date.now();
 
           // Add the difference but without milliseconds
           currentItem.spentTime += (currentTime - currentItem.startTime) / 1000;
@@ -241,6 +241,7 @@ export function handleCommand(message: string,
 
       break;
     }
+
     case "add": {
       const newItem: TodoItem = {
         label: realContent,
@@ -254,6 +255,7 @@ export function handleCommand(message: string,
 
       break;
     }
+
     default: {
       const newItem: TodoItem = {
         label: message,
@@ -270,7 +272,7 @@ export function handleCommand(message: string,
   }
 }
 
-function stringIdToIndexId (stringId: string) {
+function stringIdToIndexId(stringId: string) {
   const parsedId = +stringId;
 
   if (typeof parsedId === 'number') {
@@ -284,6 +286,6 @@ function stringIdToIndexId (stringId: string) {
   return null;
 }
 
-function moveArray (arr, from, to) {
+function moveArray(arr, from, to) {
   arr.splice(to, 0, arr.splice(from, 1)[0]);
 }
