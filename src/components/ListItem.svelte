@@ -41,8 +41,10 @@
 <label
   in:fade={{ duration: 500 }}
   out:fly={{ x: -500, duration: 500 }}
-  class="entry {item.done ? 'entry-done' : ''}
-    {item.highlighted ? 'entry-highlight' : item.highlighted === false ? 'entry-fade' : ''}">
+  class="entry"
+  class:entry-done={item.done}
+  class:entry-highlight={item.highlighted}
+  class:entry-fade={item.highlighted === false}>
   <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
   <span class="label-with-number">
     <div style="display: inline-block">
@@ -51,7 +53,6 @@
       </span>
       <span class="nes-text is-warning"> [#{item.id}] </span>
     </div>
-
     <br />
   </span>
 </label>

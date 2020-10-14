@@ -61,11 +61,13 @@
 </style>
 
 <div
-  class="nes-container {layout === 'auto' ? 'auto-layout' : ''} is-dark with-title">
+  class="nes-container is-dark with-title"
+  class:auto-layout={layout === 'auto'}>
   <p class="title">{taskListName}</p>
 
   <div
-    class="items-holder {highlightItemIndex !== -1 ? 'currently-highlighting' : ''}"
+    class="items-holder"
+    class:currently-highlighting={highlightItemIndex !== -1}
     bind:this={itemsListElement}>
     {#each items as item, _index}
       {#if showOnlyItemIndex === -1 || showOnlyItemIndex === _index}
