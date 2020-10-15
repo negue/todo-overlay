@@ -72,7 +72,7 @@
     {#each items as item, _index}
       {#if showOnlyItemIndex === -1 || showOnlyItemIndex === _index}
         <ListItem
-          item={{ ...item, id: _index + 1, highlighted: highlightItemIndex === -1 ? null : _index == highlightItemIndex }} />
+          item={{ ...item, id: _index + 1, fade: highlightItemIndex === -1 ? null : _index != highlightItemIndex }} />
       {/if}
     {/each}
   </div>

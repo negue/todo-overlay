@@ -4,7 +4,7 @@ export interface TodoItem {
   label: string;
   colorName: string;
   colorStyle: string;
-  highlighted?: boolean;
+  fade: boolean;
   startTime?: number;   // getTime() current differance till now will be calculated on the fly
   spentTime?: number; // in seconds
 }

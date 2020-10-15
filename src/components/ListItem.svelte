@@ -43,8 +43,7 @@
   out:fly={{ x: -500, duration: 500 }}
   class="entry"
   class:entry-done={item.done}
-  class:entry-highlight={item.highlighted}
-  class:entry-fade={item.highlighted === false}>
+  class:entry-fade={item.fade}>
   <input type="checkbox" class="nes-checkbox is-dark" checked={item.done} />
   <span class="label-with-number">
     <div style="display: inline-block">
