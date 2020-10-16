@@ -1,26 +1,25 @@
 export interface QueryOptions {
-    channelName: string;
-    command: string;
-    scrollingInterval: number;
-    scrollingDuration: number;
-    layout: string;
+  channelName: string;
+  command: string;
+  scrollingInterval: number;
+  scrollingDuration: number;
+  layout: string;
 }
-
 
 export function queryStringToQueryOptions(queryString: string): QueryOptions {
-    return queryString.replace('?', '').split('&').map(entry => {
-        const [optionName, optionValue] = entry.split('=');
+  return queryString.replace('?', '').split('&').map(entry => {
+    const [optionName, optionValue] = entry.split('=');
 
-        return {optionName, optionValue};
-    }).reduce((targetObject, currentValue, currentIndex) => {
-        targetObject[currentValue.optionName] = currentValue.optionValue;
+    return { optionName, optionValue };
+  }).reduce((targetObject, currentValue, currentIndex) => {
+    targetObject[currentValue.optionName] = currentValue.optionValue;
 
-        return targetObject;
-    }, {} as QueryOptions /* targetObject */)
+    return targetObject;
+  }, {} as QueryOptions /* targetObject */)
 }
 
-export function numberOrDefault(value: number|string, defaultNumber: number) {
-  if (typeof value ===  'number') {
+export function numberOrDefault(value: number | string, defaultNumber: number) {
+  if (typeof value === 'number') {
     return value;
   }
 
@@ -32,19 +31,20 @@ export function numberOrDefault(value: number|string, defaultNumber: number) {
 }
 
 export function fillDefaults(currentOptions: QueryOptions): QueryOptions {
-    const sanitizedOptions: QueryOptions = {
-       ...currentOptions,
-       scrollingInterval: numberOrDefault(currentOptions.scrollingInterval, 5000),
-        scrollingDuration: numberOrDefault(currentOptions.scrollingDuration, 2000)
-    };
+  const sanitizedOptions: QueryOptions = {
+    ...currentOptions,
+    scrollingInterval: numberOrDefault(currentOptions.scrollingInterval, 5000),
+    scrollingDuration: numberOrDefault(currentOptions.scrollingDuration, 2000),
+    layout: 'full'
+  };
 
 
-    return Object.assign({}, {
-        command: 'todo'
-    } as QueryOptions, sanitizedOptions);
+  return Object.assign({}, {
+    command: 'todo'
+  } as QueryOptions, sanitizedOptions);
 }
 
-export function timeDifference(differenceInSeconds: number ) {
+export function timeDifference(differenceInSeconds: number) {
   const hour = Math.floor((differenceInSeconds / 3600) % 24);
   const min = Math.floor((differenceInSeconds / 60) % 60); // maybe?
   const sec = Math.floor(differenceInSeconds % 60); // the rest of the seconds
