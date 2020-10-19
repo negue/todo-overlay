@@ -32,10 +32,10 @@ export function numberOrDefault(value: number | string, defaultNumber: number) {
 
 export function fillDefaults(currentOptions: QueryOptions): QueryOptions {
   const sanitizedOptions: QueryOptions = {
-    ...currentOptions,
     scrollingInterval: numberOrDefault(currentOptions.scrollingInterval, 5000),
     scrollingDuration: numberOrDefault(currentOptions.scrollingDuration, 2000),
-    layout: 'full'
+    layout: 'full',
+    ...currentOptions
   };
 
 

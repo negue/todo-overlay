@@ -247,7 +247,8 @@ export function handleCommand(message: string,
         label: realContent,
         done: false,
         colorName: '',
-        colorStyle: null
+        colorStyle: null,
+        fade: false
       };
 
       // option: add newones to the top
@@ -261,7 +262,8 @@ export function handleCommand(message: string,
         label: message,
         done: false,
         colorName: '',
-        colorStyle: null
+        colorStyle: null,
+        fade: false
       };
 
       // option: add newones to the top
