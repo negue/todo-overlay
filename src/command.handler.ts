@@ -1,5 +1,5 @@
 import type { TodoItem } from "./types/item";
-import type { Writable } from "svelte/store";
+import { get, Writable } from "svelte/store";
 import type { TodoList } from "./types/list";
 
 // todo tests
@@ -228,6 +228,30 @@ export function handleCommand(message: string,
         return -1;
       });
 
+
+      break;
+    }
+
+    case "reset": {
+      const [targetIndexStr, ...rest] = realContent.split(' ');
+
+      const targetIndex = stringIdToIndexId(targetIndexStr);
+
+      let currentItemIndex = get(currentTimer);
+      if (currentItemIndex == -1) {
+        currentItemIndex = targetIndex;
+      }
+
+      items.update(curItems => {
+        const currentItem = curItems[currentItemIndex];
+
+        currentItem.spentTime = 0;
+        if (currentItem.startTime) {
+          currentItem.startTime = Date.now();
+        }
+
+        return curItems;
+      });
 
       break;
     }

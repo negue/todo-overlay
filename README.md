@@ -42,6 +42,7 @@ Syntax for all other commands: `!COMMAND SUBCOMMAND [ID / TEXT]`
 |`highlight POSITION`|`hl`|Changes all other than `POSITION`  to a lower opacity|
 |`start POSITION`||Starts a timer at `POSITION`|
 |`stop [POSITION]`|| Stops the current timer, or optionally at `POSITION`|
+|`reset [POSITION]`|| Resets the current timer, or optionally at `POSITION`|
 |`cleanup`||Removes all "done" entries|
 
 ## Protips :
