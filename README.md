@@ -1,6 +1,6 @@
 # Todo Overlay for OBS/Twitch
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![image](https://user-images.githubusercontent.com/842273/93716478-6190a600-fb70-11ea-8267-f8e0ca6ab4b2.png)
@@ -64,6 +64,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://twitch.tv/gacbl"><img src="https://avatars0.githubusercontent.com/u/2153382?v=4" width="100px;" alt=""/><br /><sub><b>Igor Ilic</b></sub></a><br /><a href="#ideas-gigili" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/negue/todo-overlay/commits?author=gigili" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/SteveAndreou"><img src="https://avatars2.githubusercontent.com/u/4084115?v=4" width="100px;" alt=""/><br /><sub><b>Steve Andreou</b></sub></a><br /><a href="https://github.com/negue/todo-overlay/commits?author=SteveAndreou" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/RascalTwo"><img src="https://avatars0.githubusercontent.com/u/9403665?v=4" width="100px;" alt=""/><br /><sub><b>Rascal_Two</b></sub></a><br /><a href="https://github.com/negue/todo-overlay/commits?author=RascalTwo" title="Code">💻</a></td>
   </tr>
 </table>
 
